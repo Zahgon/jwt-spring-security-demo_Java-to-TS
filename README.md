@@ -1,29 +1,39 @@
-# JWT Spring Security Demo
+# JWT Spring Security Demo — TypeScript
 
 ![Screenshot from running application](etc/screenshot-jwt-spring-security-demo.png?raw=true "Screenshot JWT Spring Security Demo")
 
 ## About
-This is a demo for using **[JWT (JSON Web Token)](https://jwt.io)** with **[Spring Security](https://spring.io/projects/spring-security)** and
-**[Spring Boot](https://spring.io/projects/spring-boot)**. I completely rewrote my first version. Now this solution is based on the code base
-from the [JHipster Project](https://www.jhipster.tech/). I tried to extract the minimal configuration and classes that are needed 
-for JWT-Authentication and did some changes.
 
-[![Build Status](https://travis-ci.org/szerhusenBC/jwt-spring-security-demo.svg?branch=master)](https://travis-ci.org/szerhusenBC/jwt-spring-security-demo)
+A TypeScript/Node port of [szerhusenBC/jwt-spring-security-demo](https://github.com/szerhusenBC/jwt-spring-security-demo),
+a demo of **[JWT (JSON Web Token)](https://jwt.io)** authentication originally built with
+**Spring Security** and **Spring Boot**.
+
+The port preserves the original's HTTP contract rather than merely its feature list: status
+codes, response bodies (including Jackson's pretty-printed `" : "` field separator), error
+payloads, security headers and the issued tokens themselves are byte-compatible. A token minted
+by the Java service verifies against this one and vice versa. See
+[MIGRATION.md](MIGRATION.md) for how that was established and where the two intentionally
+differ.
 
 ## Requirements
-This demo is build with with Maven 3.6.x and Java 11.
+
+Node.js 22.5 or newer — the persistence layer uses the built-in `node:sqlite` module.
 
 ## Usage
-Just start the application with the Spring Boot maven plugin (`mvn spring-boot:run`). The application is
-running at [http://localhost:8080](http://localhost:8080).
 
-You can use the **H2-Console** for exploring the database under [http://localhost:8080/h2-console](http://localhost:8080/h2-console):
-
-![Screenshot from h2-console login](etc/screenshot-h2-console-login.png?raw=true "Screenshot H2-Console login")
+```bash
+npm install
+npm start          # builds, then serves on http://localhost:8080
+npm run dev        # watch mode
+npm test           # the ported test suite
+npm run typecheck
+```
 
 ## Backend
-There are three user accounts present to demonstrate the different levels of access to the endpoints in
-the API and the different authorization exceptions:
+
+There are three user accounts present to demonstrate the different levels of access to the
+endpoints in the API and the different authorization exceptions:
+
 ```
 Admin - admin:admin
 User - user:password
@@ -31,74 +41,52 @@ Disabled - disabled:password (this user is deactivated)
 ```
 
 There are four endpoints that are reasonable for the demo:
+
 ```
 /api/authenticate - authentication endpoint with unrestricted access
-/api/user - returns detail information for an authenticated user (a valid JWT token must be present in the request header)
-/api/persons - an example endpoint that is restricted to authorized users with the authority 'ROLE_USER' (a valid JWT token must be present in the request header)
-/api/hiddenmessage - an example endpoint that is restricted to authorized users with the authority 'ROLE_ADMIN' (a valid JWT token must be present in the request header)
+/api/user         - returns detail information for an authenticated user (a valid JWT token must be present in the request header)
+/api/persons      - an example endpoint that is restricted to authorized users with the authority 'ROLE_USER'
+/api/hiddenmessage - an example endpoint that is restricted to authorized users with the authority 'ROLE_ADMIN'
 ```
 
 ## Frontend
-I've written a small Javascript client and put some comments in the code that hopefully makes this demo understandable.
-You can find it at [/src/main/resources/static/js/client.js](/src/main/resources/static/js/client.js).
+
+The original's small JavaScript client is carried over unchanged at
+[/src/resources/static/js/client.js](src/resources/static/js/client.js) and is served from the
+application root.
 
 ### Generating password hashes for new users
 
-I'm using [bcrypt](https://en.wikipedia.org/wiki/Bcrypt) to encode passwords. Your can generate your hashes with this simple 
-tool: [Bcrypt Generator](https://www.bcrypt-generator.com)
+Passwords are bcrypt-encoded, matching the original's `BCryptPasswordEncoder`; the seeded
+`$2a$` hashes are reused as-is. You can generate new ones with the
+[Bcrypt Generator](https://www.bcrypt-generator.com).
+
+### Configuration
+
+Settings live in [src/resources/application.yml](src/resources/application.yml), the same file
+the Spring version used. Every value can be overridden with an environment variable using
+Spring's relaxed-binding upper-case form, e.g. `JWT_BASE64_SECRET` or `SERVER_PORT`.
 
 ### Using another database
 
-Actually this demo is using an embedded H2 database that is automatically configured by Spring Boot. If you want to connect 
-to another database you have to specify the connection in the *application.yml* in the resource directory. Here is an example for a MySQL DB:
-
-```
-spring:
-  jpa:
-    hibernate:
-      # possible values: validate | update | create | create-drop
-      ddl-auto: create-drop
-  datasource:
-    url: jdbc:mysql://localhost/myDatabase
-    username: myUser
-    password: myPassword
-    driver-class-name: com.mysql.jdbc.Driver
-```
-
-*Hint: For other databases like MySQL sequences don't work for ID generation. So you have to change the GenerationType in the entity beans to 'AUTO' or 'IDENTITY'.*
-
-You can find a reference of all application properties [here](http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html).
-
-### Using Flyway
-
-https://github.com/szerhusenBC/jwt-spring-security-demo/issues/81
+The demo uses an in-process SQLite database seeded from
+[src/resources/import.sql](src/resources/import.sql), standing in for the original's embedded
+H2 instance. Swapping in a networked database means replacing `src/config/database.ts` and the
+two repositories in `src/security/repository/` — note that a client for such a database will be
+asynchronous, so the repository signatures (and their callers) would need to become `async`.
 
 ## Docker
-This project has a docker image. You can find it at [https://hub.docker.com/r/hubae/jwt-spring-security-demo/](https://hub.docker.com/r/hubae/jwt-spring-security-demo/).
 
-## Questions
-If you have project related questions please take a look at the [past questions](https://github.com/szerhusenBC/jwt-spring-security-demo/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%2Cclosed%20label%3Aquestion%20) or create a new ticket with your question.
-
-*If you have questions that are not directly related to this project (e.g. common questions to the Spring Framework or Spring Security etc.) please search the web or look at [Stackoverflow](http://www.stackoverflow.com).*
-
-Sorry for that but I'm very busy right now and don't have much time.
-
-## Interesting projects
-
-* [spring-security-pac4j](https://github.com/pac4j/spring-security-pac4j) a Spring Boot integration for Pac4j (a Java security engine that covers JWT beside others)
-* For more complex microservice environments take a look here: [Using JWT with Spring Security OAuth](http://www.baeldung.com/spring-security-oauth-jwt)
+```bash
+npm run build
+docker build -f docker/Dockerfile -t jwt-spring-security-demo-ts .
+docker run -p 8080:8080 jwt-spring-security-demo-ts
+```
 
 ## Author
 
-**Stephan Zerhusen**
-
-* https://twitter.com/stzerhus
-* https://github.com/szerhusenBC
+Original project by **Stephan Zerhusen** — https://github.com/szerhusenBC
 
 ## Copyright and license
 
 The code is released under the [MIT license](LICENSE?raw=true).
-
----------------------------------------
-
-Please feel free to send me some feedback or questions!

@@ -1,0 +1,540 @@
+### AUTH user
+HTTP/1.1 200
+Authorization: Bearer <JWT>
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: SAMEORIGIN
+Content-Type: application/json;charset=UTF-8
+
+{
+  "id_token" : "<JWT>"
+}
+### AUTH admin
+HTTP/1.1 200
+Authorization: Bearer <JWT>
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: SAMEORIGIN
+Content-Type: application/json;charset=UTF-8
+
+{
+  "id_token" : "<JWT>"
+}
+### AUTH rememberMe
+HTTP/1.1 200
+Authorization: Bearer <JWT>
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: SAMEORIGIN
+Content-Type: application/json;charset=UTF-8
+
+{
+  "id_token" : "<JWT>"
+}
+### AUTH disabled
+HTTP/1.1 401
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: SAMEORIGIN
+Content-Type: application/json;charset=UTF-8
+
+{
+  "timestamp" : "<TS>",
+  "status" : 401,
+  "error" : "Unauthorized",
+  "message" : "User disabled was not activated",
+  "path" : "/api/authenticate"
+}
+### AUTH disabled+wrongpw
+HTTP/1.1 401
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: SAMEORIGIN
+Content-Type: application/json;charset=UTF-8
+
+{
+  "timestamp" : "<TS>",
+  "status" : 401,
+  "error" : "Unauthorized",
+  "message" : "User disabled was not activated",
+  "path" : "/api/authenticate"
+}
+### AUTH wrongpw
+HTTP/1.1 401
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: SAMEORIGIN
+Content-Type: application/json;charset=UTF-8
+
+{
+  "timestamp" : "<TS>",
+  "status" : 401,
+  "error" : "Unauthorized",
+  "message" : "Bad credentials",
+  "path" : "/api/authenticate"
+}
+### AUTH nouser
+HTTP/1.1 401
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: SAMEORIGIN
+Content-Type: application/json;charset=UTF-8
+
+{
+  "timestamp" : "<TS>",
+  "status" : 401,
+  "error" : "Unauthorized",
+  "message" : "Bad credentials",
+  "path" : "/api/authenticate"
+}
+### AUTH uppercase
+HTTP/1.1 200
+Authorization: Bearer <JWT>
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: SAMEORIGIN
+Content-Type: application/json;charset=UTF-8
+
+{
+  "id_token" : "<JWT>"
+}
+### AUTH by email
+HTTP/1.1 200
+Authorization: Bearer <JWT>
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: SAMEORIGIN
+Content-Type: application/json;charset=UTF-8
+
+{
+  "id_token" : "<JWT>"
+}
+### AUTH by email upper
+HTTP/1.1 200
+Authorization: Bearer <JWT>
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: SAMEORIGIN
+Content-Type: application/json;charset=UTF-8
+
+{
+  "id_token" : "<JWT>"
+}
+### AUTH short pw
+HTTP/1.1 400
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: SAMEORIGIN
+Content-Type: application/json;charset=UTF-8
+
+{
+  "timestamp" : "<TS>",
+  "status" : 400,
+  "error" : "Bad Request",
+  "errors" : [ {
+    "codes" : [ "Size.loginDto.password", "Size.password", "Size.java.lang.String", "Size" ],
+    "arguments" : [ {
+      "codes" : [ "loginDto.password", "password" ],
+      "arguments" : null,
+      "defaultMessage" : "password",
+      "code" : "password"
+    }, 100, 4 ],
+    "defaultMessage" : "size must be between 4 and 100",
+    "objectName" : "loginDto",
+    "field" : "password",
+    "rejectedValue" : "ab",
+    "bindingFailure" : false,
+    "code" : "Size"
+  } ],
+  "message" : "Validation failed for object='loginDto'. Error count: 1",
+  "path" : "/api/authenticate"
+}
+### AUTH missing username
+HTTP/1.1 400
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: SAMEORIGIN
+Content-Type: application/json;charset=UTF-8
+
+{
+  "timestamp" : "<TS>",
+  "status" : 400,
+  "error" : "Bad Request",
+  "errors" : [ {
+    "codes" : [ "NotNull.loginDto.username", "NotNull.username", "NotNull.java.lang.String", "NotNull" ],
+    "arguments" : [ {
+      "codes" : [ "loginDto.username", "username" ],
+      "arguments" : null,
+      "defaultMessage" : "username",
+      "code" : "username"
+    } ],
+    "defaultMessage" : "must not be null",
+    "objectName" : "loginDto",
+    "field" : "username",
+    "rejectedValue" : null,
+    "bindingFailure" : false,
+    "code" : "NotNull"
+  } ],
+  "message" : "Validation failed for object='loginDto'. Error count: 1",
+  "path" : "/api/authenticate"
+}
+### AUTH empty body
+HTTP/1.1 400
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: SAMEORIGIN
+Content-Type: application/json;charset=UTF-8
+
+{
+  "timestamp" : "<TS>",
+  "status" : 400,
+  "error" : "Bad Request",
+  "errors" : [ {
+    "codes" : [ "NotNull.loginDto.password", "NotNull.password", "NotNull.java.lang.String", "NotNull" ],
+    "arguments" : [ {
+      "codes" : [ "loginDto.password", "password" ],
+      "arguments" : null,
+      "defaultMessage" : "password",
+      "code" : "password"
+    } ],
+    "defaultMessage" : "must not be null",
+    "objectName" : "loginDto",
+    "field" : "password",
+    "rejectedValue" : null,
+    "bindingFailure" : false,
+    "code" : "NotNull"
+  }, {
+    "codes" : [ "NotNull.loginDto.username", "NotNull.username", "NotNull.java.lang.String", "NotNull" ],
+    "arguments" : [ {
+      "codes" : [ "loginDto.username", "username" ],
+      "arguments" : null,
+      "defaultMessage" : "username",
+      "code" : "username"
+    } ],
+    "defaultMessage" : "must not be null",
+    "objectName" : "loginDto",
+    "field" : "username",
+    "rejectedValue" : null,
+    "bindingFailure" : false,
+    "code" : "NotNull"
+  } ],
+  "message" : "Validation failed for object='loginDto'. Error count: 2",
+  "path" : "/api/authenticate"
+}
+### AUTH long username
+HTTP/1.1 400
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: SAMEORIGIN
+Content-Type: application/json;charset=UTF-8
+
+{
+  "timestamp" : "<TS>",
+  "status" : 400,
+  "error" : "Bad Request",
+  "errors" : [ {
+    "codes" : [ "Size.loginDto.username", "Size.username", "Size.java.lang.String", "Size" ],
+    "arguments" : [ {
+      "codes" : [ "loginDto.username", "username" ],
+      "arguments" : null,
+      "defaultMessage" : "username",
+      "code" : "username"
+    }, 50, 1 ],
+    "defaultMessage" : "size must be between 1 and 50",
+    "objectName" : "loginDto",
+    "field" : "username",
+    "rejectedValue" : "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "bindingFailure" : false,
+    "code" : "Size"
+  } ],
+  "message" : "Validation failed for object='loginDto'. Error count: 1",
+  "path" : "/api/authenticate"
+}
+### USER w/ user tok
+HTTP/1.1 200
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: SAMEORIGIN
+Content-Type: application/json;charset=UTF-8
+
+{
+  "username" : "user",
+  "firstname" : "user",
+  "lastname" : "user",
+  "email" : "enabled@user.com",
+  "authorities" : [ {
+    "name" : "ROLE_USER"
+  } ]
+}
+### USER w/ admin tok
+HTTP/1.1 200
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: SAMEORIGIN
+Content-Type: application/json;charset=UTF-8
+
+{
+  "username" : "admin",
+  "firstname" : "admin",
+  "lastname" : "admin",
+  "email" : "admin@admin.com",
+  "authorities" : [ {
+    "name" : "ROLE_USER"
+  }, {
+    "name" : "ROLE_ADMIN"
+  } ]
+}
+### USER anon
+HTTP/1.1 401
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: SAMEORIGIN
+Content-Type: application/json;charset=UTF-8
+
+{
+  "timestamp" : "<TS>",
+  "status" : 401,
+  "error" : "Unauthorized",
+  "message" : "Full authentication is required to access this resource",
+  "path" : "/api/user"
+}
+### USER bad tok
+HTTP/1.1 401
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: SAMEORIGIN
+Content-Type: application/json;charset=UTF-8
+
+{
+  "timestamp" : "<TS>",
+  "status" : 401,
+  "error" : "Unauthorized",
+  "message" : "Full authentication is required to access this resource",
+  "path" : "/api/user"
+}
+### USER no bearer
+HTTP/1.1 401
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: SAMEORIGIN
+Content-Type: application/json;charset=UTF-8
+
+{
+  "timestamp" : "<TS>",
+  "status" : 401,
+  "error" : "Unauthorized",
+  "message" : "Full authentication is required to access this resource",
+  "path" : "/api/user"
+}
+### PERSON user
+HTTP/1.1 200
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: SAMEORIGIN
+Content-Type: application/json;charset=UTF-8
+
+{
+  "name" : "John Doe",
+  "email" : "john.doe@test.org"
+}
+### PERSON admin
+HTTP/1.1 200
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: SAMEORIGIN
+Content-Type: application/json;charset=UTF-8
+
+{
+  "name" : "John Doe",
+  "email" : "john.doe@test.org"
+}
+### PERSON anon
+HTTP/1.1 401
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: SAMEORIGIN
+Content-Type: application/json;charset=UTF-8
+
+{
+  "timestamp" : "<TS>",
+  "status" : 401,
+  "error" : "Unauthorized",
+  "message" : "Full authentication is required to access this resource",
+  "path" : "/api/person"
+}
+### HIDDEN admin
+HTTP/1.1 200
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: SAMEORIGIN
+Content-Type: application/json;charset=UTF-8
+
+{
+  "message" : "this is a hidden message!"
+}
+### HIDDEN user
+HTTP/1.1 403
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: SAMEORIGIN
+Content-Type: application/json;charset=UTF-8
+
+{
+  "timestamp" : "<TS>",
+  "status" : 403,
+  "error" : "Forbidden",
+  "message" : "Access is denied",
+  "path" : "/api/hiddenmessage"
+}
+### HIDDEN anon
+HTTP/1.1 401
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: SAMEORIGIN
+Content-Type: application/json;charset=UTF-8
+
+{
+  "timestamp" : "<TS>",
+  "status" : 401,
+  "error" : "Unauthorized",
+  "message" : "Full authentication is required to access this resource",
+  "path" : "/api/hiddenmessage"
+}
+### UNKNOWN api path
+HTTP/1.1 401
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: SAMEORIGIN
+Content-Type: application/json;charset=UTF-8
+
+{
+  "timestamp" : "<TS>",
+  "status" : 401,
+  "error" : "Unauthorized",
+  "message" : "Full authentication is required to access this resource",
+  "path" : "/api/nope"
+}
+### UNKNOWN api path w/ tok
+HTTP/1.1 404
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: SAMEORIGIN
+Content-Type: application/hal+json;charset=UTF-8
+
+{
+  "timestamp" : "<TS>",
+  "status" : 404,
+  "error" : "Not Found",
+  "message" : "No message available",
+  "path" : "/api/nope"
+}
+### CORS preflight
+HTTP/1.1 200
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Access-Control-Allow-Origin: http://example.com
+Access-Control-Allow-Methods: GET
+Access-Control-Allow-Credentials: true
+
+
+### CORS actual
+HTTP/1.1 200
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Access-Control-Allow-Origin: http://example.com
+Access-Control-Allow-Credentials: true
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: SAMEORIGIN
+Content-Type: application/json;charset=UTF-8
+
+{
+  "name" : "John Doe",
+  "email" : "john.doe@test.org"
+}
